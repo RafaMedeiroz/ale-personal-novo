@@ -1,0 +1,46 @@
+/* ==========================================================
+   ALE FERRAZ — Saúde em Movimento
+   Tokens de design: cores, fontes, raios, escala de texto
+   ========================================================== */
+:root {
+  /* Cores */
+  --petroleo: #0E3B3C;
+  --petroleo-2: #175556;
+  --petroleo-3: #0A2C2D;
+  --nevoa: #F4F7F5;
+  --branco: #FFFFFF;
+  --salvia: #D6E6DE;
+  --salvia-2: #EAF2EE;
+  --mel: #E9B949;
+  --mel-escuro: #9A6F0F;
+  --mel-claro: #F6DE9C;
+  --grafite: #1E2A2A;
+  --cinza: #4F605E;
+  --linha: #D3DEDA;
+  --wa: #25D366;
+  --wa-texto: #063B1B;
+
+  /* Fontes */
+  --display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --body: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, sans-serif;
+
+  /* Forma */
+  --raio: 22px;
+  --raio-s: 14px;
+  --raio-pill: 999px;
+  --sombra: 0 20px 50px rgba(14, 59, 60, .14);
+  --sombra-forte: 0 30px 70px rgba(14, 59, 60, .22);
+
+  /* Ritmo */
+  --gutter-l: max(20px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(20px, env(safe-area-inset-right, 0px));
+  --faixa: clamp(64px, 9vw, 112px);
+  --largura: 1180px;
+  --transicao: .25s ease;
+
+  /* Escala de texto controlada pelo usuário (A− / A / A+) */
+  --escala: 1;
+  color-scheme: light;
+}
+html[data-texto="2"] { --escala: 1.12; }
+html[data-texto="3"] { --escala: 1.25; }

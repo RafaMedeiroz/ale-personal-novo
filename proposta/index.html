@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ale Ferraz — Longevidade Ativa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: documento de proposta em faixas largas; os mockups do site novo aparecem "ao vivo" dentro de janelas. */
+:root{
+  --petroleo:#0E3B3C; --petroleo-2:#175556; --petroleo-3:#0A2C2D;
+  --nevoa:#F4F7F5; --branco:#FFFFFF; --salvia:#D6E6DE; --salvia-2:#EAF2EE;
+  --mel:#E9B949; --mel-escuro:#9A6F0F; --mel-claro:#F6DE9C;
+  --grafite:#1E2A2A; --cinza:#4F605E; --linha:#D3DEDA;
+  --wa:#25D366; --erro:#B23A3A;
+  --display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --body:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;
+  --raio:20px; --raio-s:12px;
+  --gutter-l:max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);font-size:17px;line-height:1.6;color:var(--grafite);background:var(--nevoa);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.1;text-wrap:balance;color:var(--petroleo)}
+h2{font-size:clamp(30px,4vw,44px);font-weight:700;letter-spacing:-0.01em}
+h3{font-size:clamp(21px,2.4vw,26px);font-weight:600}
+p{max-width:68ch}
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.faixa{padding-block:88px}
+.faixa.escura{background:var(--petroleo);color:var(--nevoa)}
+.faixa.escura h2,.faixa.escura h3{color:var(--branco)}
+.faixa.salvia{background:var(--salvia-2)}
+.eyebrow{font-family:var(--body);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--mel-escuro);display:inline-flex;align-items:center;gap:10px;margin-bottom:14px}
+.eyebrow::before{content:"";width:26px;height:3px;border-radius:3px;background:var(--mel)}
+.escura .eyebrow{color:var(--mel)}
+.lead{font-size:19px;color:var(--cinza);max-width:60ch;margin-top:14px}
+.escura .lead{color:#C9D9D3}
+.cabeca{margin-bottom:40px}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.g3.demos{grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+.card{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);padding:26px;min-width:0}
+.card h3{margin-bottom:8px}
+.card p{font-size:16px;color:var(--cinza)}
+ul.lista{list-style:none;display:grid;gap:10px}
+ul.lista li{padding-left:28px;position:relative;font-size:16px}
+ul.lista li::before{content:"";position:absolute;left:0;top:9px;width:14px;height:14px;border-radius:50%;background:var(--mel)}
+ul.lista.ruim li::before{background:var(--erro);opacity:.75}
+ul.lista.bom li::before{background:var(--petroleo-2)}
+code,.mono{font-family:ui-monospace,Consolas,monospace;font-size:.92em}
+:focus-visible{outline:3px solid var(--mel);outline-offset:3px}
+
+/* ---------- barra superior ---------- */
+.topo{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(244,247,245,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--linha)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--nevoa)}
+.topo .wrap{display:flex;align-items:center;gap:18px;height:60px}
+.topo .marca{font-family:var(--display);font-weight:700;color:var(--petroleo);white-space:nowrap;display:flex;align-items:center;gap:8px;text-decoration:none}
+.topo nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0}
+.topo nav::-webkit-scrollbar{display:none}
+.topo nav a{font-size:14px;font-weight:700;color:var(--cinza);text-decoration:none;padding:8px 12px;border-radius:999px;white-space:nowrap}
+.topo nav a:hover{background:var(--salvia);color:var(--petroleo)}
+
+/* ---------- capa ---------- */
+.capa{position:relative;overflow:hidden;padding-block:96px 72px}
+.capa .aurora{position:absolute;inset:-20% -10%;z-index:0;pointer-events:none;filter:blur(60px);opacity:.9}
+.aurora span{position:absolute;border-radius:50%;mix-blend-mode:multiply}
+.aurora span:nth-child(1){width:52vw;height:52vw;max-width:720px;max-height:720px;left:-10%;top:-10%;background:radial-gradient(circle,#CFE7DC 0%,rgba(207,231,220,0) 65%);animation:flutua 18s ease-in-out infinite}
+.aurora span:nth-child(2){width:44vw;height:44vw;max-width:600px;max-height:600px;right:-8%;top:10%;background:radial-gradient(circle,#F6DE9C 0%,rgba(246,222,156,0) 65%);animation:flutua 22s ease-in-out infinite reverse}
+.aurora span:nth-child(3){width:40vw;height:40vw;max-width:520px;max-height:520px;left:35%;bottom:-20%;background:radial-gradient(circle,#BFD9CF 0%,rgba(191,217,207,0) 65%);animation:flutua 26s ease-in-out infinite 3s}
+@keyframes flutua{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6%,8%) scale(1.08)}}
+.capa .wrap{position:relative;z-index:1}
+.capa h1{font-size:clamp(44px,7vw,92px);font-weight:800;letter-spacing:-0.02em;line-height:.98;max-width:12ch}
+.capa h1 em{font-style:normal;color:var(--petroleo-2);font-weight:500;font-variation-settings:"opsz" 96}
+.capa .meta{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:28px;font-size:15px;color:var(--cinza)}
+.capa .meta b{color:var(--petroleo)}
+
+/* ---------- diagnóstico ---------- */
+.antes{border-radius:var(--raio);overflow:hidden;border:1px solid var(--linha);box-shadow:0 20px 50px rgba(14,59,60,.12);background:#000}
+.antes img{width:100%;height:auto}
+.duas{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:start}
+@media (max-width:900px){.duas{grid-template-columns:1fr}}
+
+/* ---------- paleta ---------- */
+.paleta{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:14px}
+.sw{border-radius:var(--raio-s);overflow:hidden;border:1px solid var(--linha);background:var(--branco)}
+.sw .cor{height:96px}
+.sw .inf{padding:12px 14px}
+.sw .inf b{display:block;font-family:var(--display);font-size:15px;color:var(--petroleo)}
+.sw .inf span{font-size:13px;color:var(--cinza);display:block}
+.sw .inf code{font-size:12px;color:var(--grafite)}
+.contraste{margin-top:28px}
+.contraste table{width:100%;border-collapse:collapse;font-size:15px;background:var(--branco);border-radius:var(--raio-s);overflow:hidden;border:1px solid var(--linha)}
+.contraste th,.contraste td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--linha)}
+.contraste th{font-family:var(--display);font-weight:600;background:var(--salvia-2);color:var(--petroleo)}
+.contraste td.num{font-variant-numeric:tabular-nums;font-weight:700}
+.amostra{display:inline-block;padding:4px 12px;border-radius:8px;font-weight:700}
+.tabela-scroll{overflow-x:auto}
+
+/* ---------- tipografia ---------- */
+.tipo{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:820px){.tipo{grid-template-columns:1fr}}
+.spec{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);padding:30px;min-width:0}
+.spec .nome{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--mel-escuro);margin-bottom:14px}
+.spec .grande{font-family:var(--display);font-size:clamp(40px,5vw,64px);font-weight:800;line-height:1;color:var(--petroleo);letter-spacing:-0.02em;overflow-wrap:anywhere}
+.spec .media{font-family:var(--display);font-size:28px;font-weight:600;color:var(--petroleo);margin-top:10px}
+.spec .corpo{font-size:19px;margin-top:14px;max-width:38ch}
+.spec .porque{font-size:15px;color:var(--cinza);margin-top:16px;padding-top:14px;border-top:1px dashed var(--linha)}
+.escala{display:grid;gap:6px;margin-top:20px;font-size:14px;color:var(--cinza)}
+.escala div{display:flex;align-items:baseline;gap:14px}
+.escala div span:first-child{min-width:48px;font-variant-numeric:tabular-nums}
+.escala div span:last-child{font-family:var(--display);color:var(--petroleo)}
+
+/* ---------- janela de mockup ---------- */
+.janela{border-radius:22px;overflow:hidden;border:1px solid var(--linha);box-shadow:0 30px 70px rgba(14,59,60,.18);background:var(--branco)}
+.janela .barra{height:38px;background:#E8EFEB;display:flex;align-items:center;gap:8px;padding:0 14px;border-bottom:1px solid var(--linha)}
+.janela .barra i{width:11px;height:11px;border-radius:50%;background:#C8D4CF;display:block}
+.janela .barra span{margin-left:12px;font-size:12px;color:var(--cinza);background:var(--branco);border-radius:6px;padding:2px 10px;flex:1;max-width:360px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ===== MOCKUP DO SITE NOVO (escopo .site) ===== */
+.site{--escala:1;font-family:var(--body);font-size:calc(18px * var(--escala));color:var(--grafite);background:var(--nevoa);position:relative;overflow:hidden;min-width:0}
+.site *{min-width:0}
+.site .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 32px;position:relative;z-index:3}
+.site .logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:1.15em;color:var(--petroleo);text-decoration:none}
+.site .logo small{display:block;font-family:var(--body);font-weight:400;font-size:.6em;color:var(--cinza);letter-spacing:.08em;text-transform:uppercase;line-height:1}
+.site .links{display:flex;gap:4px;align-items:center}
+.site .links a{font-size:.85em;font-weight:700;color:var(--petroleo);text-decoration:none;padding:10px 14px;border-radius:999px}
+.site .links a:hover{background:var(--salvia)}
+.site .a11y{display:flex;gap:4px;margin-left:8px;border:1px solid var(--linha);border-radius:999px;padding:3px;background:var(--branco)}
+.site .a11y button{font:inherit;font-weight:700;font-size:.8em;border:0;background:transparent;color:var(--petroleo);width:36px;height:32px;border-radius:999px;cursor:pointer}
+.site .a11y button:hover{background:var(--salvia)}
+.site .hero{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:center;padding:30px 32px 56px;position:relative;z-index:2}
+.site .hero .aurora{position:absolute;inset:-30% -10%;z-index:-1;filter:blur(70px);opacity:.85;pointer-events:none}
+.site .selo{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1px solid rgba(14,59,60,.12);border-radius:999px;padding:8px 16px 8px 10px;font-size:.78em;font-weight:700;color:var(--petroleo)}
+.site .selo i{width:22px;height:22px;border-radius:50%;background:var(--mel);display:grid;place-items:center;font-style:normal;font-size:.8em;color:var(--petroleo)}
+.site h1{font-family:var(--display);font-size:3.1em;font-weight:800;letter-spacing:-0.025em;line-height:1.02;color:var(--petroleo);margin-top:22px;max-width:12ch}
+.site h1 em{font-style:normal;color:var(--petroleo-2);font-weight:500}
+.site .sub{font-size:1.08em;color:var(--cinza);margin-top:18px;max-width:34ch;line-height:1.55}
+.site .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.site .btn{display:inline-flex;align-items:center;gap:10px;font:inherit;font-weight:700;font-size:.95em;padding:16px 26px;border-radius:999px;text-decoration:none;cursor:pointer;border:2px solid transparent;min-height:52px;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.site .btn.p{background:var(--petroleo);color:var(--branco);box-shadow:0 10px 24px rgba(14,59,60,.22)}
+.site .btn.p:hover{background:var(--petroleo-2);transform:translateY(-2px);box-shadow:0 16px 30px rgba(14,59,60,.28)}
+.site .btn.s{background:transparent;color:var(--petroleo);border-color:var(--petroleo)}
+.site .btn.s:hover{background:var(--salvia)}
+.site .btn.wa{background:var(--wa);color:#063b1b}
+.site .btn svg{width:1.2em;height:1.2em;flex:none}
+.site .prova{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:30px;padding-top:22px;border-top:1px solid var(--linha);font-size:.85em;color:var(--cinza)}
+.site .prova b{display:block;font-family:var(--display);font-size:1.7em;color:var(--petroleo);line-height:1;font-variant-numeric:tabular-nums}
+.site .foto{position:relative;justify-self:center;width:min(100%,400px);perspective:1000px}
+.site .foto .moldura{border-radius:200px 200px 28px 28px;overflow:hidden;aspect-ratio:3/4;box-shadow:0 30px 60px rgba(14,59,60,.25);transform-style:preserve-3d;transition:transform .15s ease-out;background:var(--salvia)}
+.site .foto img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.site .foto .brilho{position:absolute;inset:-6%;border-radius:50%;background:radial-gradient(circle,rgba(233,185,73,.45),rgba(233,185,73,0) 60%);z-index:-1;filter:blur(20px)}
+.site .flut{position:absolute;background:rgba(255,255,255,.82);backdrop-filter:blur(12px);border:1px solid rgba(14,59,60,.1);border-radius:16px;padding:12px 16px;box-shadow:0 12px 30px rgba(14,59,60,.15);font-size:.8em;display:flex;gap:10px;align-items:center}
+.site .flut b{font-family:var(--display);font-size:1.5em;color:var(--petroleo);line-height:1}
+.site .flut.a{left:-6%;bottom:18%}
+.site .flut.b{right:-4%;top:14%}
+.site .flut .ok{width:30px;height:30px;border-radius:50%;background:var(--salvia);display:grid;place-items:center;color:var(--petroleo)}
+.site .faixa-conf{background:var(--petroleo);color:var(--nevoa);overflow:hidden;padding:14px 0;font-size:.8em;font-weight:700;letter-spacing:.06em;text-transform:uppercase;position:relative;z-index:2}
+.site .faixa-conf .trilho{display:flex;gap:48px;width:max-content;animation:desliza 40s linear infinite}
+.site .faixa-conf span{display:flex;align-items:center;gap:14px;white-space:nowrap}
+.site .faixa-conf span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--mel)}
+@keyframes desliza{to{transform:translateX(-50%)}}
+.site .logo span{white-space:nowrap}
+@media (max-width:600px){.site .links a.btn{display:none}}
+@media (max-width:860px){
+  .site .hero{grid-template-columns:1fr;padding:20px 20px 40px}
+  .site .nav{padding:16px 20px}
+  .site .links a:not(.btn){display:none}
+  .site h1{font-size:2.3em}
+  .site .flut.a{left:0}.site .flut.b{right:0}
+}
+
+/* ---------- comparação ---------- */
+.compara{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media (max-width:980px){.compara{grid-template-columns:1fr}}
+.compara .rotulo{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--cinza);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.compara .rotulo i{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+/* ---------- celular ---------- */
+.fone{width:330px;max-width:100%;margin:0 auto;background:#0F1F1F;border-radius:44px;padding:12px;box-shadow:0 30px 60px rgba(14,59,60,.3)}
+.fone .tela{background:var(--nevoa);border-radius:34px;overflow:hidden;position:relative;height:640px}
+.fone .notch{width:110px;height:28px;background:#0F1F1F;border-radius:0 0 18px 18px;margin:0 auto}
+.fone .site{font-size:15px}
+.fone .site .nav{padding:10px 18px}
+.fone .site .hero{grid-template-columns:1fr;padding:6px 18px 24px;gap:18px}
+.fone .site h1{font-size:2.1em;margin-top:12px}
+.fone .site .sub{font-size:.95em}
+.fone .site .btn{padding:13px 18px;font-size:.9em;min-height:48px}
+.fone .site .foto{width:100%}
+.fone .site .foto .moldura{aspect-ratio:4/3;border-radius:120px 120px 20px 20px}
+.fone .site .foto img{object-position:50% 15%}
+.fone .site .flut.b{top:8%;right:4%}
+.fone .site .links a:not(.btn){display:none}
+.fone .site .prova{display:none}
+.fone .wa-fixo{position:absolute;right:16px;bottom:16px;width:56px;height:56px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 10px 24px rgba(37,211,102,.4)}
+.fone .wa-fixo svg{width:28px;height:28px;fill:#063b1b}
+.lado{display:grid;grid-template-columns:1fr 330px;gap:40px;align-items:center}
+@media (max-width:900px){.lado{grid-template-columns:1fr}}
+
+/* ---------- demos de efeitos ---------- */
+.demo{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.demo .palco{height:220px;position:relative;overflow:hidden;display:grid;place-items:center;background:var(--salvia-2)}
+.demo .txt{padding:18px 20px}
+.demo .txt h3{font-size:19px;margin-bottom:4px}
+.demo .txt p{font-size:15px;color:var(--cinza)}
+.demo .uso{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mel-escuro);margin-top:10px;display:block}
+/* aurora demo */
+.palco.aurora-demo .aurora{position:absolute;inset:-40%;filter:blur(40px)}
+.palco.aurora-demo .vidro{position:relative;background:rgba(255,255,255,.55);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.8);border-radius:16px;padding:16px 22px;font-family:var(--display);font-weight:600;color:var(--petroleo);box-shadow:0 12px 30px rgba(14,59,60,.12)}
+/* tilt demo */
+.tilt{width:150px;aspect-ratio:3/4;border-radius:70px 70px 16px 16px;overflow:hidden;box-shadow:0 20px 40px rgba(14,59,60,.25);transition:transform .15s ease-out;transform-style:preserve-3d}
+.tilt img{width:100%;height:100%;object-fit:cover}
+/* contador demo */
+.cont{display:flex;gap:30px}
+.cont div{text-align:center}
+.cont b{font-family:var(--display);font-size:46px;color:var(--petroleo);line-height:1;display:block;font-variant-numeric:tabular-nums}
+.cont span{font-size:13px;color:var(--cinza);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+/* anéis */
+.aneis{display:flex;gap:18px}
+.anel{width:86px;text-align:center}
+.anel svg{width:86px;height:86px;transform:rotate(-90deg)}
+.anel circle{fill:none;stroke-width:8;stroke-linecap:round}
+.anel .trilha{stroke:var(--salvia)}
+.anel .valor{stroke:var(--petroleo-2);stroke-dasharray:226;stroke-dashoffset:226;transition:stroke-dashoffset 1.6s cubic-bezier(.2,.8,.2,1)}
+.anel:nth-child(2) .valor{stroke:var(--mel)}
+.anel:nth-child(3) .valor{stroke:var(--petroleo)}
+.anel span{display:block;font-size:12px;font-weight:700;color:var(--petroleo);margin-top:6px}
+/* escala de fonte demo */
+.fonte-demo{--e:1;text-align:center;padding:0 20px}
+.fonte-demo p{font-size:calc(16px * var(--e));max-width:none;transition:font-size .25s ease;color:var(--grafite)}
+.fonte-demo .ctl{display:inline-flex;gap:6px;margin-top:14px;border:1px solid var(--linha);border-radius:999px;padding:4px;background:var(--branco)}
+.fonte-demo button{font:inherit;font-weight:700;border:0;background:transparent;color:var(--petroleo);min-width:44px;height:38px;border-radius:999px;cursor:pointer}
+.fonte-demo button:hover{background:var(--salvia)}
+/* revelar demo */
+.revela{display:grid;gap:8px;width:80%}
+.revela div{height:34px;border-radius:10px;background:var(--branco);border:1px solid var(--linha);animation:sobe .9s ease both}
+.revela div:nth-child(2){animation-delay:.15s}.revela div:nth-child(3){animation-delay:.3s}
+@keyframes sobe{from{transform:translateY(14px);opacity:.35}to{transform:none;opacity:1}}
+
+/* ---------- componentes ---------- */
+.comp{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;align-items:start}
+.plano{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);padding:28px;position:relative}
+.plano.destaque{border:2px solid var(--petroleo);box-shadow:0 20px 50px rgba(14,59,60,.14)}
+.plano .tag{position:absolute;top:-14px;left:24px;background:var(--mel);color:var(--petroleo);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:999px}
+.plano .freq{font-weight:700;color:var(--cinza);font-size:15px}
+.plano .valor{font-family:var(--display);font-size:50px;font-weight:700;color:var(--petroleo);line-height:1;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+.plano .valor small{font-size:18px;font-weight:600;margin-right:4px}
+.plano .por{font-size:14px;color:var(--cinza)}
+.plano ul{list-style:none;margin:18px 0;display:grid;gap:8px;font-size:15px}
+.plano li{padding-left:26px;position:relative}
+.plano li::before{content:"✓";position:absolute;left:0;color:var(--petroleo-2);font-weight:700}
+.cita{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);padding:28px}
+.cita blockquote{font-family:var(--display);font-size:22px;font-weight:500;color:var(--petroleo);line-height:1.35}
+.cita .quem{display:flex;align-items:center;gap:12px;margin-top:18px;font-size:15px}
+.cita .quem i{width:44px;height:44px;border-radius:50%;background:var(--salvia);display:grid;place-items:center;font-style:normal;font-weight:700;color:var(--petroleo);font-family:var(--display)}
+.cita .quem span{display:block;color:var(--cinza);font-size:14px}
+.faq{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);overflow:hidden}
+.faq details{border-bottom:1px solid var(--linha)}
+.faq details:last-child{border-bottom:0}
+.faq summary{cursor:pointer;list-style:none;padding:18px 22px;font-family:var(--display);font-weight:600;font-size:18px;color:var(--petroleo);display:flex;justify-content:space-between;gap:14px;align-items:center}
+.faq summary::after{content:"+";font-size:26px;color:var(--mel-escuro);flex:none}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding:0 22px 18px;font-size:16px;color:var(--cinza)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:10px 16px;font-weight:700;font-size:15px;background:var(--salvia-2);border:1px solid var(--linha);color:var(--petroleo)}
+.chip.on{background:var(--petroleo);color:var(--branco);border-color:var(--petroleo)}
+.botoes{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+
+/* ---------- estrutura (timeline) ---------- */
+.mapa{display:grid;gap:0;counter-reset:sec}
+.mapa .sec{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.12);min-width:0}
+.mapa .sec:last-child{border-bottom:0}
+.mapa .sec .n{font-family:var(--display);font-size:30px;font-weight:700;color:var(--mel);font-variant-numeric:tabular-nums;line-height:1.1}
+.mapa .sec h3{color:var(--branco);font-size:21px}
+.mapa .sec p{color:#C9D9D3;font-size:16px;margin-top:4px}
+.mapa .sec .fx{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mel);background:rgba(233,185,73,.12);padding:4px 10px;border-radius:999px}
+
+/* ---------- tom de voz ---------- */
+.voz table{width:100%;border-collapse:collapse;background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio-s);overflow:hidden;font-size:16px}
+.voz th,.voz td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--linha);vertical-align:top}
+.voz th{font-family:var(--display);background:var(--salvia-2);color:var(--petroleo)}
+.voz td.de{color:var(--cinza);text-decoration:line-through;text-decoration-color:rgba(178,58,58,.5)}
+.voz td.para{font-weight:700;color:var(--petroleo)}
+
+/* ---------- fotos ---------- */
+.fotos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:16px}
+.fotos figure{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio-s);overflow:hidden}
+.fotos img{aspect-ratio:1;object-fit:cover;width:100%;object-position:top}
+.fotos figcaption{padding:12px 14px;font-size:14px;color:var(--cinza)}
+.fotos figcaption b{display:block;color:var(--petroleo);font-family:var(--display);font-size:15px}
+.fotos .status{display:inline-block;margin-top:6px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--salvia);color:var(--petroleo)}
+.fotos .status.fora{background:#F3DCDC;color:var(--erro)}
+.fotos .status.nova{background:var(--mel-claro);color:var(--mel-escuro)}
+.fotos .vazio{display:grid;place-items:center;aspect-ratio:1;background:repeating-linear-gradient(45deg,var(--salvia-2) 0 10px,var(--branco) 10px 20px);color:var(--cinza);font-size:14px;text-align:center;padding:20px}
+
+/* ---------- plano de implementação ---------- */
+.fases{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px}
+.fase{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);padding:22px}
+.fase .k{font-family:var(--display);font-weight:700;color:var(--mel-escuro);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.fase h3{font-size:19px;margin:6px 0 8px}
+.fase p{font-size:15px;color:var(--cinza)}
+pre{background:var(--petroleo-3);color:#D9E7E1;border-radius:var(--raio-s);padding:18px 20px;font-size:14px;line-height:1.5;overflow-x:auto}
+
+/* ---------- decisões ---------- */
+.decisoes{display:grid;gap:12px;counter-reset:q}
+.decisoes .q{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio-s);padding:18px 20px 18px 62px;position:relative;font-size:16px}
+.decisoes .q::before{counter-increment:q;content:counter(q);position:absolute;left:18px;top:16px;width:30px;height:30px;border-radius:50%;background:var(--mel);color:var(--petroleo);font-family:var(--display);font-weight:700;display:grid;place-items:center}
+.decisoes .q b{color:var(--petroleo)}
+.decisoes .q span{display:block;color:var(--cinza);font-size:15px;margin-top:4px}
+
+.rodape{padding-block:40px;text-align:center;font-size:14px;color:var(--cinza);border-top:1px solid var(--linha)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="wrap">
+    <a class="marca" href="#topo">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 19a10 10 0 0 1 20 0" fill="none" stroke="#E9B949" stroke-width="3.5" stroke-linecap="round"/><circle cx="13" cy="19" r="3" fill="#0E3B3C"/></svg>
+      Proposta · Ale Ferraz
+    </a>
+    <nav aria-label="Seções da proposta">
+      <a href="#diagnostico">Diagnóstico</a>
+      <a href="#conceito">Conceito</a>
+      <a href="#paleta">Paleta</a>
+      <a href="#tipografia">Tipografia</a>
+      <a href="#hero">Hero</a>
+      <a href="#efeitos">Efeitos</a>
+      <a href="#componentes">Componentes</a>
+      <a href="#estrutura">Estrutura</a>
+      <a href="#voz">Tom de voz</a>
+      <a href="#fotos">Fotos</a>
+      <a href="#plano">Implementação</a>
+      <a href="#decisoes">Decisões</a>
+    </nav>
+  </div>
+</header>
+
+<!-- CAPA -->
+<section class="capa" id="topo">
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="wrap">
+    <div class="eyebrow">Proposta de nova identidade visual · versão 1 · 8 nov 2026</div>
+    <h1>Longevidade <em>Ativa</em></h1>
+    <p class="lead">Direção visual para o novo site do Ale Ferraz: sair do tom de alta performance e falar com quem quer saúde, força e autonomia em qualquer idade, sem abrir mão de um site moderno, com efeitos e que converte em conversa no WhatsApp.</p>
+    <div class="meta">
+      <div><b>Cliente</b> Ale Ferraz · Personal Trainer · CREF 022202-G/SP</div>
+      <div><b>Público novo</b> 50+ e terceira idade, reabilitação, emagrecimento saudável, gestantes</div>
+      <div><b>Entrega</b> site novo em <span class="mono">ale-personal-novo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DIAGNÓSTICO -->
+<section class="faixa" id="diagnostico">
+  <div class="wrap">
+    <div class="cabeca">
+      <div class="eyebrow">1 · Diagnóstico do site atual</div>
+      <h2>O site de hoje é bom tecnicamente. O problema é o que ele comunica.</h2>
+      <p class="lead">Fundo preto, amarelo ácido, letras gigantes em caixa alta, foto em preto e branco, faixa gritando "alto rendimento" e "Olympia". Tudo isso diz "atleta de competição". Uma pessoa de 65 anos com dor no joelho olha e pensa: isso não é pra mim.</p>
+    </div>
+    <div class="duas">
+      <div>
+        <div class="antes"><img src="img/site-atual-hero.jpg" alt="Captura do hero do site atual: fundo preto, título amarelo ALE FERRAZ, foto em preto e branco no Olympia Amateur" width="800" height="600"></div>
+      </div>
+      <div class="grid" style="gap:28px">
+        <div>
+          <h3 style="margin-bottom:12px">O que afasta o novo público</h3>
+          <ul class="lista ruim">
+            <li><b>Linguagem de urgência e pressão</b>: "vagas limitadas", "garanta sua vaga agora", "treinar forte", emojis de fogo. Soa venda agressiva.</li>
+            <li><b>Identidade de competição</b>: Olympia no hero, na faixa e na seção Sobre. Foto de atleta de biquíni como primeira imagem do "Sobre".</li>
+            <li><b>Contraste e leitura cansativos</b>: texto cinza (#878787) sobre preto, corpo em 14px, títulos em caixa alta com stroke. Péssimo para olhos de 60+.</li>
+            <li><b>Estética "dark gym"</b>: preto + amarelo neon é a cara de suplemento e crossfit, não de saúde e cuidado.</li>
+            <li><b>Nome inconsistente</b>: "ALEXANDRE FERRAZ" na barra, "ALE FERRAZ" no hero e rodapé. Em telas médias o logo encosta no menu.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="margin-bottom:12px">O que vale manter</h3>
+          <ul class="lista bom">
+            <li><b>Conversão direta no WhatsApp</b> com mensagens prontas por plano. Funciona e continua.</li>
+            <li><b>Estrutura de seções</b>: sobre, resultados, planos, depoimentos. A ordem muda, o conteúdo serve de base.</li>
+            <li><b>Credenciais reais</b>: CREF, 15 anos, 500 alunos, experiência com gestantes e reabilitação. Passam a ser o centro.</li>
+            <li><b>Stack simples</b>: HTML, CSS e JS puros, sem build. Carrega rápido e é fácil de manter.</li>
+            <li><b>O amarelo</b>, como DNA da marca, sobrevive amadurecido: vira um dourado quente usado como detalhe, não como grito.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEITO -->
+<section class="faixa escura" id="conceito">
+  <div class="wrap">
+    <div class="cabeca">
+      <div class="eyebrow">2 · Conceito e posicionamento</div>
+      <h2>Do pódio para a vida real.</h2>
+      <p class="lead">A história do Ale continua sendo a mesma: 15 anos levando pessoas do zero ao resultado, inclusive atletas. O que muda é o foco da promessa. Em vez de "transforme seu corpo", o site passa a prometer o que esse público realmente quer: subir escada sem dor, brincar com o neto, voltar a confiar no próprio corpo.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)">
+        <h3 style="color:var(--mel)">Frase-guia</h3>
+        <p style="color:var(--nevoa);font-family:var(--display);font-size:24px;line-height:1.25;font-weight:500">"Movimento é saúde. Em qualquer idade."</p>
+        <p style="color:#C9D9D3;margin-top:12px">Vai no hero. Direta, sem jargão, sem promessa de corpo.</p>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)">
+        <h3 style="color:var(--mel)">Sensação que o site deve passar</h3>
+        <p style="color:#C9D9D3">Clínica de saúde premium, não academia de musculação. Luz, ar, espaço em branco, fotos coloridas e sorrindo. Tecnologia aparece como cuidado (precisão, acompanhamento), nunca como "cyber".</p>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)">
+        <h3 style="color:var(--mel)">Como a competição entra</h3>
+        <p style="color:#C9D9D3">Como prova de competência técnica, em uma linha na seção Sobre: "Já preparou atletas para o Olympia Amateur Brazil. Hoje usa o mesmo rigor para cuidar de quem quer viver melhor." Sem foto de pódio no topo.</p>
+      </div>
+    </div>
+    <div class="grid g4" style="margin-top:20px">
+      <div class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)"><h3 style="color:var(--branco);font-size:18px">Público principal</h3><p style="color:#C9D9D3">Mulheres e homens de 50 a 80 anos, e os filhos que procuram um personal para os pais.</p></div>
+      <div class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)"><h3 style="color:var(--branco);font-size:18px">Públicos secundários</h3><p style="color:#C9D9D3">Reabilitação e dor crônica, emagrecimento saudável, gestantes, iniciantes de qualquer idade.</p></div>
+      <div class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)"><h3 style="color:var(--branco);font-size:18px">Objeções a vencer</h3><p style="color:#C9D9D3">"Nunca treinei", "tenho medo de me machucar", "preciso de liberação médica?", "é caro?".</p></div>
+      <div class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)"><h3 style="color:var(--branco);font-size:18px">Ação única</h3><p style="color:#C9D9D3">Agendar uma avaliação pelo WhatsApp. Todo botão principal leva para isso.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PALETA -->
+<section class="faixa" id="paleta">
+  <div class="wrap">
+    <div class="cabeca">
+      <div class="eyebrow">3 · Paleta</div>
+      <h2>Verde-petróleo, névoa e mel.</h2>
+      <p class="lead">Petróleo profundo no lugar do preto: transmite saúde, calma e confiança, e ainda dá contraste alto. Fundo claro com leve tom de verde para descansar os olhos. O amarelo da marca atual vira um mel dourado, usado só em detalhes: selos, ícones, sublinhados.</p>
+    </div>
+    <div class="paleta">
+      <div class="sw"><div class="cor" style="background:#0E3B3C"></div><div class="inf"><b>Petróleo</b><code>#0E3B3C</code><span>Títulos, botões principais, faixas escuras</span></div></div>
+      <div class="sw"><div class="cor" style="background:#175556"></div><div class="inf"><b>Petróleo claro</b><code>#175556</code><span>Hover, destaques em texto, anéis</span></div></div>
+      <div class="sw"><div class="cor" style="background:#F4F7F5;border-bottom:1px solid #D3DEDA"></div><div class="inf"><b>Névoa</b><code>#F4F7F5</code><span>Fundo da página</span></div></div>
+      <div class="sw"><div class="cor" style="background:#D6E6DE"></div><div class="inf"><b>Sálvia</b><code>#D6E6DE</code><span>Superfícies suaves, chips, hover</span></div></div>
+      <div class="sw"><div class="cor" style="background:#E9B949"></div><div class="inf"><b>Mel</b><code>#E9B949</code><span>Acento: selos, ícones, detalhes. Nunca texto sobre branco</span></div></div>
+      <div class="sw"><div class="cor" style="background:#9A6F0F"></div><div class="inf"><b>Mel escuro</b><code>#9A6F0F</code><span>Rótulos pequenos em dourado sobre fundo claro</span></div></div>
+      <div class="sw"><div class="cor" style="background:#1E2A2A"></div><div class="inf"><b>Grafite</b><code>#1E2A2A</code><span>Texto corrido</span></div></div>
+      <div class="sw"><div class="cor" style="background:#4F605E"></div><div class="inf"><b>Cinza-verde</b><code>#4F605E</code><span>Texto secundário</span></div></div>
+      <div class="sw"><div class="cor" style="background:#25D366"></div><div class="inf"><b>WhatsApp</b><code>#25D366</code><span>Só no botão flutuante e no CTA final</span></div></div>
+    </div>
+    <div class="contraste">
+      <h3 style="margin-bottom:12px">Contraste medido (WCAG)</h3>
+      <p style="font-size:15px;color:var(--cinza);margin-bottom:14px">Para leitores com mais idade a meta é AAA (7:1) em todo texto corrido. O site atual tem cinza sobre preto em 3,4:1, abaixo até do mínimo AA.</p>
+      <div class="tabela-scroll">
+      <table>
+        <thead><tr><th>Combinação</th><th>Amostra</th><th>Razão</th><th>Nível</th></tr></thead>
+        <tbody>
+          <tr><td>Grafite sobre Névoa (texto corrido)</td><td><span class="amostra" style="background:#F4F7F5;color:#1E2A2A">Treino seguro</span></td><td class="num">13,7 : 1</td><td>AAA</td></tr>
+          <tr><td>Petróleo sobre Névoa (títulos)</td><td><span class="amostra" style="background:#F4F7F5;color:#0E3B3C">Movimento</span></td><td class="num">11,4 : 1</td><td>AAA</td></tr>
+          <tr><td>Branco sobre Petróleo (botões, faixa escura)</td><td><span class="amostra" style="background:#0E3B3C;color:#fff">Agendar</span></td><td class="num">12,3 : 1</td><td>AAA</td></tr>
+          <tr><td>Cinza-verde sobre Névoa (texto secundário)</td><td><span class="amostra" style="background:#F4F7F5;color:#4F605E">Acompanhamento</span></td><td class="num">6,2 : 1</td><td>AA (AAA em 18px+)</td></tr>
+          <tr><td>Mel sobre Petróleo (destaques na faixa escura)</td><td><span class="amostra" style="background:#0E3B3C;color:#E9B949">15 anos</span></td><td class="num">6,7 : 1</td><td>AA+</td></tr>
+          <tr><td>Petróleo sobre Sálvia (chips)</td><td><span class="amostra" style="background:#D6E6DE;color:#0E3B3C">Gestantes</span></td><td class="num">9,5 : 1</td><td>AAA</td></tr>
+          <tr><td>Mel escuro sobre Névoa (rótulos pequenos)</td><td><span class="amostra" style="background:#F4F7F5;color:#9A6F0F">COMO FUNCIONA</span></td><td class="num">4,2 : 1</td><td>AA (só em negrito, maiúsculas)</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPOGRAFIA -->
+<section class="faixa salvia" id="tipografia">
+  <div class="wrap">
+    <div class="cabeca">
+      <div class="eyebrow">4 · Tipografia</div>
+      <h2>Uma fonte com personalidade. Outra feita para enxergar.</h2>
+      <p class="lead">A escolha do corpo de texto é a decisão mais "responsável" da proposta: a Atkinson Hyperlegible foi desenhada pelo Braille Institute para pessoas com baixa visão, diferenciando letras parecidas (I, l, 1; O, 0). Nos títulos, a Bricolage Grotesque dá o ar moderno e caloroso.</p>
+    </div>
+    <div class="tipo">
+      <div class="spec">
+        <div class="nome">Títulos · Bricolage Grotesque</div>
+        <div class="grande">Força para viver bem</div>
+        <div class="media">Treino com propósito, do iniciante ao atleta</div>
+        <div class="porque">Grotesca contemporânea com eixo óptico variável: fica elegante em tamanhos grandes e firme em tamanhos médios. Sem caixa alta forçada, sem stroke. Peso 800 só no H1; 600 a 700 no resto.</div>
+      </div>
+      <div class="spec">
+        <div class="nome">Texto · Atkinson Hyperlegible</div>
+        <p class="corpo">Cada treino começa com uma avaliação completa: histórico de saúde, mobilidade, equilíbrio e força. A partir dela o Ale monta um plano que respeita o seu ritmo e evolui com você. Illinois 1l0O.</p>
+        <div class="porque">Corpo em 18px (o atual usa 14px), entrelinha 1,6, parágrafos de até 65 caracteres. Negrito real para destaques, itálico raro.</div>
+        <div class="escala">
+          <div><span>64px</span><span style="font-size:32px;font-weight:800">H1 · Hero</span></div>
+          <div><span>44px</span><span style="font-size:26px;font-weight:700">H2 · Seções</span></div>
+          <div><span>26px</span><span style="font-size:20px;font-weight:600">H3 · Cards</span></div>
+          <div><span>18px</span><span style="font-family:var(--body);font-weight:400">Corpo de texto</span></div>
+          <div><span>13px</span><span style="font-family:var(--body);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:12px">Rótulos</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HERO MOCKUP -->
+<section class="faixa" id="hero">
+  <div class="wrap">
+    <div class="cabeca">
+      <div class="eyebrow">5 · Hero do site novo (mockup ao vivo)</div>
+      <h2>A primeira tela com a foto que o Ale escolheu.</h2>
+      <p class="lead">Isso não é imagem: é HTML e CSS funcionando. Passe o mouse na foto, clique em A+ e A− na barra, veja a aurora se mover ao fundo. A foto colorida, em moldura de arco, troca a estética de pôster por retrato de confiança.</p>
+    </div>
+
+    <div class="janela">
+      <div class="barra"><i></i><i></i><i></i><span>aleferraz.com.br</span></div>
+      <div class="site" id="siteDesktop">
+        <nav class="nav" aria-label="Navegação do mockup">
+          <a class="logo" href="#hero">
+            <svg width="34" height="34" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 19a10 10 0 0 1 20 0" fill="none" stroke="#E9B949" stroke-width="3.5" stroke-linecap="round"/><circle cx="13" cy="19" r="3" fill="#0E3B3C"/></svg>
+            <span>Ale Ferraz<small>Personal Trainer</small></span>
+          </a>
+          <div class="links">
+            <a href="#hero">Para quem é</a><a href="#hero">Como funciona</a><a href="#hero">Histórias</a><a href="#hero">Planos</a>
+            <div class="a11y" aria-label="Tamanho do texto"><button type="button" data-esc="-" aria-label="Diminuir texto">A−</button><button type="button" data-esc="+" aria-label="Aumentar texto">A+</button></div>
+            <a class="btn p" href="#hero" style="padding:12px 20px;min-height:44px;margin-left:8px">Agendar avaliação</a>
+          </div>
+        </nav>
+        <div class="hero">
+          <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div>
+            <div class="selo"><i>✓</i> CREF 022202-G/SP · 15 anos de experiência</div>
+            <h1>Movimento é saúde. <em>Em qualquer idade.</em></h1>
+            <p class="sub">Treino personalizado, seguro e acompanhado de perto para você ganhar força, equilíbrio e autonomia. Do primeiro dia na academia à volta por cima depois de uma lesão.</p>
+            <div class="ctas">
+              <a class="btn p" href="#hero"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 1.9.8 2.5.7 3 .6.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 22a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.9 9.9 0 1 1 12 22m8.4-18.3A11.8 11.8 0 0 0 .2 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.7a11.9 11.9 0 0 0 5.7 1.5c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.4"/></svg> Agendar avaliação</a>
+              <a class="btn s" href="#hero">Conhecer o método</a>
+            </div>
+            <div class="prova">
+              <div><b data-n="15">0</b>anos de experiência</div>
+              <div><b data-n="500">0</b>alunos acompanhados</div>
+              <div><b data-n="4">0</b>especialidades</div>
+            </div>
+          </div>
+          <div class="foto">
+            <div class="brilho" aria-hidden="true"></div>
+            <div class="moldura tilt-alvo"><img src="img/ale-aluna.webp" alt="Ale Ferraz abraçado a uma aluna sorridente, na academia" width="900" height="1200"></div>
+            <div class="flut a"><b>60+</b><span>treino para<br>terceira idade</span></div>
+            <div class="flut b"><span class="ok">✓</span><span>Avaliação física<br>antes de começar</span></div>
+          </div>
+        </div>
+        <div class="faixa-conf" aria-hidden="true">
+          <div class="trilho">
+            <span>Terceira idade</span><span>Reabilitação</span><span>Emagrecimento saudável</span><span>Gestantes</span><span>Força e equilíbrio</span><span>Presencial e online</span>
+            <span>Terceira idade</span><span>Reabilitação</span><span>Emagrecimento saudável</span><span>Gestantes</span><span>Força e equilíbrio</span><span>Presencial e online</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compara" style="margin-top:48px">
+      <div>
+        <div class="rotulo"><i style="background:#B23A3A"></i> Antes</div>
+        <div class="antes"><img src="img/site-atual-hero.jpg" alt="Hero atual" width="800" height="600"></div>
+      </div>
+      <div>
+        <div class="rotulo"><i style="background:var(--petroleo-2)"></i> Depois (mesma tela, reduzida)</div>
+        <div class="janela" style="box-shadow:none">
+          <div class="site" style="font-size:12px">
+            <div class="hero" style="padding:18px 20px 26px;gap:20px">
+              <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div>
+                <div class="selo"><i>✓</i> CREF 022202-G/SP</div>
+                <h1>Movimento é saúde. <em>Em qualquer idade.</em></h1>
+                <p class="sub">Treino personalizado e seguro para ganhar força, equilíbrio e autonomia.</p>
+                <div class="ctas"><span class="btn p" style="min-height:0;padding:10px 16px">Agendar avaliação</span><span class="btn s" style="min-height:0;padding:10px 16px">Conhecer o método</span></div>
+              </div>
+              <div class="foto"><div class="moldura" style="border-radius:120px 120px 16px 16px"><img src="img/ale-aluna.webp" alt="" width="900" height="1200"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lado" style="margin-top:64px">
+      <div>
+        <h3 style="margin-bottom:10px">No celular, onde a maioria vai ver</h3>
+        <p style="color:var(--cinza)">Filhos e netos abrem o link no WhatsApp e passam para os pais. Por isso: botão de agendar sempre visível, texto grande, um único objetivo por tela, e o botão do WhatsApp fixo com 56px de toque.</p>
+        <ul class="lista" style="margin-top:18px">
+          <li>Menu recolhido com os botões A+ e A− visíveis fora dele.</li>
+          <li>Foto em arco mais baixo, para o título e o botão caberem na primeira tela.</li>
+          <li>Faixa de confiança com rolagem lenta (40s), pausada em "reduzir movimento".</li>
+          <li>Nada depende de hover: o que aparece no mouse também aparece no toque.</li>
+        </ul>
+      </div>
+      <div class="fone">
+        <div class="tela">
+          <div class="notch"></div>
+          <div class="site">
+            <nav class="nav"><span class="logo"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 19a10 10 0 0 1 20 0" fill="none" stroke="#E9B949" stroke-width="3.5" stroke-linecap="round"/><circle cx="13" cy="19" r="3" fill="#0E3B3C"/></svg><span>Ale Ferraz</span></span><div class="links"><div class="a11y"><button type="button" aria-label="Diminuir">A−</button><button type="button" aria-label="Aumentar">A+</button></div><span style="width:34px;height:34px;border-radius:10px;border:1px solid var(--linha);display:grid;place-items:center;margin-left:6px;font-size:18px;color:var(--petroleo)">☰</span></div></nav>
+            <div class="hero">
+              <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="foto"><div class="moldura"><img src="img/ale-aluna.webp" alt="" width="900" height="1200"></div><div class="flut b"><b>60+</b><span>treino para<br>terceira idade</span></div></div>
+              <div>
+                <div class="selo"><i>✓</i> CREF 022202-G/SP</div>
+                <h1>Movimento é saúde. <em>Em qualquer idade.</em></h1>
+                <p class="sub">Treino seguro e acompanhado de perto para ganhar força e autonomia.</p>
+                <div class="ctas"><span class="btn p">Agendar avaliação</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="wa-fixo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 1.9.8 2.5.7 3 .6.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 22a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.9 9.9 0 1 1 12 22m8.4-18.3A11.8 11.8 0 0 0 .2 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.7a11.9 11.9 0 0 0 5.7 1.5c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.4"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EFEITOS -->
+<section class="faixa salvia" id="efeitos">
+  <div class="wrap">
+    <div class="cabeca">
+      <div class="eyebrow">6 · Efeitos tecnológicos (todos ao vivo)</div>
+      <h2>Moderno sem parecer videogame.</h2>
+      <p class="lead">A regra: o efeito tem que servir à leitura ou à confiança. Movimento lento, nada pisca, nada pulsa, e tudo respeita a preferência "reduzir movimento" do sistema. Estes seis entram no site; cada card diz onde.</p>
+    </div>
+    <div class="grid g3 demos">
+      <div class="demo">
+        <div class="palco aurora-demo"><div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div><div class="vidro">Fundo aurora + card de vidro</div></div>
+        <div class="txt"><h3>Aurora suave e vidro fosco</h3><p>Manchas de sálvia e mel deslizando atrás do conteúdo, em 18 a 26 segundos. Selos e etiquetas flutuantes em vidro fosco por cima.</p><span class="uso">Hero · seção de planos</span></div>
+      </div>
+      <div class="demo">
+        <div class="palco"><div class="tilt tilt-alvo"><img src="img/gestante.webp" alt="Ale ao lado de uma aluna gestante, ambos sorrindo" width="700" height="700"></div></div>
+        <div class="txt"><h3>Retrato em arco com profundidade 3D</h3><p>A foto inclina levemente seguindo o mouse (até 6 graus). No toque, fica parada. Moldura em arco substitui a borda de "cantos amarelos" do site atual.</p><span class="uso">Hero · Sobre · histórias</span></div>
+      </div>
+      <div class="demo">
+        <div class="palco"><div class="cont"><div><b data-n="15">0</b><span>anos</span></div><div><b data-n="500">0</b><span>alunos</span></div><div><b data-n="98" data-suf="%">0</b><span>satisfação</span></div></div></div>
+        <div class="txt"><h3>Números que contam ao entrar na tela</h3><p>Contadores de 2 segundos quando a seção aparece. Já existe no site atual e fica.</p><span class="uso">Hero · Sobre</span></div>
+      </div>
+      <div class="demo">
+        <div class="palco"><div class="aneis">
+          <div class="anel"><svg viewBox="0 0 86 86"><circle class="trilha" cx="43" cy="43" r="36"/><circle class="valor" cx="43" cy="43" r="36" data-p="85"/></svg><span>Força</span></div>
+          <div class="anel"><svg viewBox="0 0 86 86"><circle class="trilha" cx="43" cy="43" r="36"/><circle class="valor" cx="43" cy="43" r="36" data-p="70"/></svg><span>Equilíbrio</span></div>
+          <div class="anel"><svg viewBox="0 0 86 86"><circle class="trilha" cx="43" cy="43" r="36"/><circle class="valor" cx="43" cy="43" r="36" data-p="60"/></svg><span>Mobilidade</span></div>
+        </div></div>
+        <div class="txt"><h3>Anéis dos pilares do treino</h3><p>Força, equilíbrio, mobilidade e condicionamento desenhados como anéis que se preenchem. Visual de app de saúde, familiar para quem usa relógio ou celular.</p><span class="uso">Seção "Como funciona"</span></div>
+      </div>
+      <div class="demo">
+        <div class="palco"><div class="fonte-demo"><p>Você controla o tamanho do texto.</p><div class="ctl"><button type="button" data-f="-">A−</button><button type="button" data-f="0">A</button><button type="button" data-f="+">A+</button></div></div></div>
+        <div class="txt"><h3>Controle de tamanho de texto</h3><p>Três níveis, lembrados no navegador da pessoa. Botão sempre visível na barra. É um recurso raro em site de personal e diz muito sobre cuidado.</p><span class="uso">Barra superior, todas as páginas</span></div>
+      </div>
+      <div class="demo">
+        <div class="palco"><div class="revela"><div></div><div></div><div></div></div></div>
+        <div class="txt"><h3>Entrada em cascata ao rolar</h3><p>Cards sobem 14px e ganham opacidade com atraso de 150ms entre si. Conteúdo sempre legível, mesmo antes da animação.</p><span class="uso">Todas as seções com cards</span></div>
+      </div>
+    </div>
+    <p style="margin-top:28px;font-size:15px;color:var(--cinza)">O que fica de fora de propósito: fundo de vídeo, partículas, cursor customizado, texto com stroke, marquee rápido, badge pulsando. Todos aparecem em sites de academia e todos distraem o leitor que a gente quer alcançar.</p>
+  </div>
+</section>
+
+<!-- COMPONENTES -->
+<section class="faixa" id="componentes">
+  <div class="wrap">
+    <div class="cabeca">
+      <div class="eyebrow">7 · Componentes</div>
+      <h2>As peças que montam o site.</h2>
+      <p class="lead">Botões em pílula com 52px de altura (alvo confortável para dedo e para tremor nas mãos), cards com um só nível de borda, perguntas frequentes em sanfona, depoimentos com a fala em destaque.</p>
+    </div>
+    <div class="grid" style="gap:40px">
+      <div>
+        <h3 style="margin-bottom:14px">Botões e chips</h3>
+        <div class="site" style="background:transparent;overflow:visible">
+          <div class="botoes">
+            <span class="btn p">Agendar avaliação</span>
+            <span class="btn s">Conhecer o método</span>
+            <span class="btn wa"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 1.9.8 2.5.7 3 .6.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 22a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.9 9.9 0 1 1 12 22m8.4-18.3A11.8 11.8 0 0 0 .2 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.7a11.9 11.9 0 0 0 5.7 1.5c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.4"/></svg> Falar no WhatsApp</span>
+          </div>
+        </div>
+        <div class="chips" style="margin-top:18px">
+          <span class="chip on">Terceira idade</span><span class="chip">Reabilitação</span><span class="chip">Emagrecimento</span><span class="chip">Gestantes</span><span class="chip">Iniciantes</span><span class="chip">Online</span>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="plano destaque">
+          <span class="tag">Mais escolhido</span>
+          <div class="freq">3x por semana</div>
+          <div class="valor"><small>R$</small>90</div>
+          <div class="por">por aula de 1 hora</div>
+          <ul><li>Avaliação física completa</li><li>Treino 100% individual</li><li>Ajustes a cada 4 semanas</li><li>Contato direto com o Ale</li></ul>
+          <div class="site" style="background:transparent;overflow:visible"><span class="btn p" style="width:100%;justify-content:center">Quero conhecer este plano</span></div>
+        </div>
+        <div class="cita">
+          <blockquote>"Treinei durante toda a gestação com o Ale e me senti segura e acolhida em cada sessão."</blockquote>
+          <div class="quem"><i>F</i><div>Fernanda M.<span>Treino na gestação</span></div></div>
+        </div>
+        <div class="faq">
+          <details open><summary>Nunca treinei na vida. Posso começar?</summary><p>Pode. A maioria dos alunos do Ale começou do zero. A primeira aula é uma avaliação, sem peso, só para entender como seu corpo está hoje.</p></details>
+          <details><summary>Tenho dor no joelho ou na coluna. É seguro?</summary><p>O treino é montado em torno da sua limitação, não apesar dela. Se precisar, o Ale pede liberação do seu médico antes.</p></details>
+          <details><summary>Preciso de liberação médica?</summary><p>Para maiores de 60 anos ou com condição de saúde conhecida, sim. É simples e protege você.</p></details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESTRUTURA -->
+<section class="faixa escura" id="estrutura">
+  <div class="wrap">
+    <div class="cabeca">
+      <div class="eyebrow">8 · Estrutura do site novo</div>
+      <h2>Dez seções, uma página, um objetivo.</h2>
+      <p class="lead">Continua sendo uma página única com rolagem. A ordem segue a cabeça de quem chega desconfiado: "isso é pra mim?", "como funciona?", "quem já fez?", "quanto custa?", "e se...?", "ok, como falo com ele?".</p>
+    </div>
+    <div class="mapa">
+      <div class="sec"><div class="n">01</div><div><h3>Hero</h3><p>Frase-guia, foto nova, selo CREF, dois botões. Aurora ao fundo.</p><span class="fx">aurora · tilt · contador</span></div></div>
+      <div class="sec"><div class="n">02</div><div><h3>Para quem é</h3><p>Cinco cards: terceira idade, reabilitação e dor, emagrecimento saudável, gestantes, iniciantes. Cada um com uma frase de objeção respondida.</p><span class="fx">cascata</span></div></div>
+      <div class="sec"><div class="n">03</div><div><h3>Como funciona</h3><p>Três passos reais: avaliação, plano, acompanhamento. Anéis dos pilares (força, equilíbrio, mobilidade, condicionamento).</p><span class="fx">anéis</span></div></div>
+      <div class="sec"><div class="n">04</div><div><h3>Sobre o Ale</h3><p>Foto colorida, 15 anos, CREF, formação. A competição entra aqui como credencial, em uma linha.</p><span class="fx">tilt · contador</span></div></div>
+      <div class="sec"><div class="n">05</div><div><h3>Histórias de alunos</h3><p>Galeria calma (sem marquee acelerado) com fotos coloridas e legenda curta: gestante, 17 kg, 12 semanas. Novas fotos de alunos 60+ assim que existirem.</p><span class="fx">cascata</span></div></div>
+      <div class="sec"><div class="n">06</div><div><h3>Depoimentos</h3><p>Três falas em destaque. Prioridade para alunos mais velhos ou em reabilitação.</p></div></div>
+      <div class="sec"><div class="n">07</div><div><h3>Planos</h3><p>Mesmos três planos e os extras, sem "vagas limitadas". Texto do botão: "Quero conhecer este plano".</p><span class="fx">vidro</span></div></div>
+      <div class="sec"><div class="n">08</div><div><h3>Perguntas frequentes</h3><p>Sanfona com as seis dúvidas que mais travam esse público. Fundamental para filhos que pesquisam pelos pais.</p></div></div>
+      <div class="sec"><div class="n">09</div><div><h3>Contato</h3><p>CTA final em WhatsApp, Instagram, horário de atendimento, local (ver decisões).</p></div></div>
+      <div class="sec"><div class="n">10</div><div><h3>Rodapé + barra fixa</h3><p>Rodapé enxuto. Botão de WhatsApp fixo em todas as telas e controle A+/A− na barra superior.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOM DE VOZ -->
+<section class="faixa voz" id="voz">
+  <div class="wrap">
+    <div class="cabeca">
+      <div class="eyebrow">9 · Tom de voz</div>
+      <h2>De vendedor para profissional de saúde.</h2>
+      <p class="lead">A troca de frases é tão importante quanto a troca de cores. Tudo que pressiona sai; tudo que acolhe e explica entra. O "você" continua, o tom é de conversa.</p>
+    </div>
+    <div class="tabela-scroll">
+    <table>
+      <thead><tr><th style="width:50%">Site atual</th><th>Site novo</th></tr></thead>
+      <tbody>
+        <tr><td class="de">🔥 Garantir minha vaga →</td><td class="para">Agendar minha avaliação</td></tr>
+        <tr><td class="de">🎯 Vagas limitadas — garanta sua vaga agora</td><td class="para">Atendimento individual, com hora marcada</td></tr>
+        <tr><td class="de">Transforme seu corpo e sua vida</td><td class="para">Movimento é saúde. Em qualquer idade.</td></tr>
+        <tr><td class="de">500+ alunos transformados</td><td class="para">500 alunos acompanhados em 15 anos</td></tr>
+        <tr><td class="de">Quero treinar forte com o plano de 5x por semana!</td><td class="para">Olá Ale, quero saber mais sobre o plano de 5x por semana.</td></tr>
+        <tr><td class="de">Resultado acelerado</td><td class="para">Evolução consistente e segura</td></tr>
+        <tr><td class="de">ALTO RENDIMENTO · OLYMPIA AMATEUR BRAZIL (na faixa do hero)</td><td class="para">"Já preparou atletas para o Olympia Amateur Brazil. Hoje usa o mesmo rigor para cuidar de quem quer viver melhor." (na seção Sobre)</td></tr>
+        <tr><td class="de">Condições especiais por tempo limitado!</td><td class="para">Os valores podem ser ajustados ao seu caso. É só conversar.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- FOTOS -->
+<section class="faixa salvia" id="fotos">
+  <div class="wrap">
+    <div class="cabeca">
+      <div class="eyebrow">10 · Fotografia</div>
+      <h2>Colorida, sorrindo, com gente de verdade.</h2>
+      <p class="lead">Nada de preto e branco com contraste alto. A regra para toda foto nova: luz natural ou da academia, aluno e Ale no mesmo plano, sem pose de pódio. O que já existe, classificado:</p>
+    </div>
+    <div class="fotos">
+      <figure><img src="img/ale-aluna.webp" alt="Ale com aluna na academia" width="900" height="1200"><figcaption><b>Ale e aluna (foto nova)</b>Hero e seção Sobre. A imagem principal do site.<span class="status nova">Destaque</span></figcaption></figure>
+      <figure><img src="img/gestante.webp" alt="Ale com aluna gestante" width="700" height="700"><figcaption><b>Treino na gestação</b>Histórias e card "Gestantes".<span class="status">Mantém</span></figcaption></figure>
+      <figure><img src="img/antes-depois.webp" alt="Antes e depois de aluna em 12 semanas" width="700" height="700"><figcaption><b>12 semanas</b>Histórias, com legenda sobre saúde, não sobre medidas.<span class="status">Mantém</span></figcaption></figure>
+      <figure><img src="img/antes-depois-1.webp" alt="Antes e depois de aluna, emagrecimento" width="700" height="707"><figcaption><b>Emagrecimento</b>Histórias.<span class="status">Mantém</span></figcaption></figure>
+      <figure><div class="vazio">competicao-atleta-2.jpg<br>(atleta com medalha)</div><figcaption><b>Atleta de competição</b>Sai do hero, do Sobre e da galeria. Pode virar uma miniatura na linha de credenciais.<span class="status fora">Aposentar</span></figcaption></figure>
+      <figure><div class="vazio">hero-olympia.png</div><figcaption><b>Ale no Olympia</b>Sai do hero. Opcional como miniatura ao lado da credencial.<span class="status fora">Aposentar</span></figcaption></figure>
+      <figure><div class="vazio">A produzir</div><figcaption><b>Alunos 60+ treinando</b>Três a cinco fotos: alongamento, agachamento com apoio, caminhada na esteira, risada. Celular já resolve.<span class="status nova">Pedir ao Ale</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- IMPLEMENTAÇÃO -->
+<section class="faixa" id="plano">
+  <div class="wrap">
+    <div class="cabeca">
+      <div class="eyebrow">11 · Plano de implementação</div>
+      <h2>Mesma stack, projeto novo do zero.</h2>
+      <p class="lead">HTML, CSS e JavaScript puros, sem framework e sem build, como hoje. Fica fácil de hospedar em qualquer lugar (GitHub Pages, Vercel, Hostinger) e de o Rafael manter sozinho.</p>
+    </div>
+    <div class="fases">
+      <div class="fase"><div class="k">Fase 1</div><h3>Base e hero</h3><p>Tokens de cor e tipo, barra com A+/A−, hero com a foto nova, faixa de confiança. Já dá para o Ale ver e opinar.</p></div>
+      <div class="fase"><div class="k">Fase 2</div><h3>Seções de conteúdo</h3><p>Para quem é, como funciona com anéis, sobre, histórias, depoimentos, planos, FAQ, contato.</p></div>
+      <div class="fase"><div class="k">Fase 3</div><h3>Efeitos e acessibilidade</h3><p>Aurora, tilt, contadores, cascata; reduzir movimento; foco visível; alvos de 48px; teste com leitor de tela.</p></div>
+      <div class="fase"><div class="k">Fase 4</div><h3>Responsivo e performance</h3><p>Testes em 360, 768, 1024 e 1440px; imagens em WebP com tamanhos por tela; fontes com swap; meta de carregar em menos de 2s no 4G.</p></div>
+      <div class="fase"><div class="k">Fase 5</div><h3>SEO local e entrega</h3><p>Título e descrição voltados a "personal trainer terceira idade [cidade]", dados estruturados de negócio local, Open Graph com a foto nova, favicon de verdade.</p></div>
+    </div>
+    <div class="grid g2" style="margin-top:28px;align-items:start">
+      <div>
+        <h3 style="margin-bottom:10px">Estrutura de pastas</h3>
+<pre>ale-personal-novo/
+├── index.html
+├── css/
+│   ├── tokens.css      cores, fontes, espaçamentos
+│   └── style.css
+├── js/
+│   └── main.js         A+/A−, contadores, anéis, tilt, cascata
+├── images/             WebP otimizado + original
+├── proposta/           este documento
+└── README.md</pre>
+      </div>
+      <div>
+        <h3 style="margin-bottom:10px">Acessibilidade como diferencial</h3>
+        <ul class="lista bom">
+          <li>Corpo 18px, títulos sem caixa alta, contraste AAA no texto.</li>
+          <li>Controle A+/A− salvo no navegador da pessoa.</li>
+          <li>Botões e links com no mínimo 48px de área de toque.</li>
+          <li>Tudo navegável por teclado, com foco visível em dourado.</li>
+          <li>Animações desligadas quando o sistema pede "reduzir movimento".</li>
+          <li>Textos alternativos reais em todas as fotos.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DECISÕES -->
+<section class="faixa salvia" id="decisoes">
+  <div class="wrap">
+    <div class="cabeca">
+      <div class="eyebrow">12 · Decisões em aberto</div>
+      <h2>O que preciso de você e do Ale antes de começar.</h2>
+      <p class="lead">Nada disso trava a fase 1. Mas quanto antes vierem, menos retrabalho.</p>
+    </div>
+    <div class="decisoes">
+      <div class="q"><b>Nome na marca: "Ale Ferraz" ou "Alexandre Ferraz"?</b><span>A proposta usa "Ale Ferraz" em tudo, por ser mais próximo e por já estar no Instagram.</span></div>
+      <div class="q"><b>Mostrar os valores dos planos (R$ 100 / 90 / 75) ou "sob consulta"?</b><span>Minha recomendação é mostrar: esse público desconfia de preço escondido. Mas é decisão comercial do Ale.</span></div>
+      <div class="q"><b>Cidade e local de atendimento.</b><span>Define o SEO local e a seção de contato. O DDD 15 sugere região de Sorocaba, mas preciso da confirmação e do nome da academia, se puder aparecer.</span></div>
+      <div class="q"><b>Fotos de competição: aposentar de vez ou manter como miniatura na credencial?</b><span>A proposta tira do hero e da galeria. Uma miniatura pequena na seção Sobre é o máximo que eu manteria.</span></div>
+      <div class="q"><b>Existe algum aluno 60+ ou em reabilitação disposto a dar depoimento e foto?</b><span>É a prova social mais importante do site novo. Um depoimento em áudio transcrito já serve.</span></div>
+      <div class="q"><b>O vídeo (video.MOV, 31 MB): tem algum trecho calmo e útil?</b><span>Se tiver, vira um clipe de 10 segundos, mudo, dentro da seção Sobre. Se não, fica de fora.</span></div>
+      <div class="q"><b>Aprovação da direção: paleta petróleo + mel e a dupla de fontes.</b><span>Se o Ale preferir algo mais quente (terracota) ou mais frio (azul), ajusto antes da fase 1.</span></div>
+    </div>
+  </div>
+</section>
+
+<footer class="rodape">
+  <div class="wrap">Proposta de identidade visual · Ale Ferraz Personal Trainer · preparada por Rafael Medeiros · 8 de novembro de 2026</div>
+</footer>
+
+<script>
+(function(){
+  var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Tilt 3D que segue o mouse (desligado no toque) */
+  if (!reduz && window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.tilt-alvo').forEach(function(el){
+      var pai = el.parentElement;
+      pai.addEventListener('mousemove', function(e){
+        var r = el.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - .5;
+        var y = (e.clientY - r.top) / r.height - .5;
+        el.style.transform = 'rotateY(' + (x * 12) + 'deg) rotateX(' + (-y * 12) + 'deg)';
+      });
+      pai.addEventListener('mouseleave', function(){ el.style.transform = ''; });
+    });
+  }
+
+  /* Contadores ao entrar na tela */
+  function conta(el){
+    var alvo = parseInt(el.getAttribute('data-n'), 10), suf = el.getAttribute('data-suf') || '';
+    if (reduz) { el.textContent = alvo + suf; return; }
+    var ini = performance.now(), dur = 1800;
+    function passo(t){
+      var p = Math.min((t - ini) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(alvo * e) + suf;
+      if (p < 1) requestAnimationFrame(passo);
+    }
+    requestAnimationFrame(passo);
+  }
+  var io = new IntersectionObserver(function(ents){
+    ents.forEach(function(en){
+      if (!en.isIntersecting) return;
+      var el = en.target;
+      if (el.hasAttribute('data-n')) conta(el);
+      if (el.classList.contains('valor')) {
+        var p = parseInt(el.getAttribute('data-p'), 10);
+        el.style.strokeDashoffset = 226 - 226 * p / 100;
+      }
+      io.unobserve(el);
+    });
+  }, { threshold: .4 });
+  document.querySelectorAll('[data-n], .anel .valor').forEach(function(el){ io.observe(el); });
+
+  /* A+ / A− no mockup */
+  var site = document.getElementById('siteDesktop'), esc = 1;
+  site.querySelectorAll('[data-esc]').forEach(function(b){
+    b.addEventListener('click', function(){
+      esc = Math.min(1.3, Math.max(.9, esc + (b.getAttribute('data-esc') === '+' ? .1 : -.1)));
+      site.style.setProperty('--escala', esc.toFixed(2));
+    });
+  });
+  /* demo de tamanho de fonte */
+  var fd = document.querySelector('.fonte-demo'), f = 1;
+  fd.querySelectorAll('[data-f]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var k = b.getAttribute('data-f');
+      f = k === '0' ? 1 : Math.min(1.5, Math.max(.85, f + (k === '+' ? .15 : -.15)));
+      fd.style.setProperty('--e', f.toFixed(2));
+    });
+  });
+})();
+</script>
+</body>
+</html>
